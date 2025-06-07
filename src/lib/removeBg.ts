@@ -2,7 +2,7 @@ export const removeBackground = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append('image', file);
 
-  const response = await fetch('http://127.0.0.1:5000/remove-bg', {
+  const response = await fetch('https://flask-rembg.onrender.com/remove-bg', {
     method: 'POST',
     body: formData,
   });
