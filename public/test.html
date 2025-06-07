@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup + Login Test</title>
+</head>
+<body>
+  <h2>API Test - Kayıt + Giriş</h2>
+
+  <input id="email" type="email" placeholder="E-mail"><br><br>
+  <input id="password" type="password" placeholder="Şifre"><br><br>
+  <button onclick="send()">Gönder</button>
+
+  <pre id="result"></pre>
+
+  <script>
+    async function send() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const resultArea = document.getElementById("result");
+
+      try {
+        // 1. Kayıt denemesi
+        const signupRes = await fetch("http://localhost:3000/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const signupData = await signupRes.json();
+        resultArea.textContent = "Signup Result:\n" + JSON.stringify(signupData, null, 2);
+
+        // 2. Şimdi login dene (kayıt başarısız olsa bile)
+        const loginRes = await fetch("http://localhost:3000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const loginData = await loginRes.json();
+        resultArea.textContent += "\n\nLogin Result:\n" + JSON.stringify(loginData, null, 2);
+
+        // 3. Başarılıysa yönlendir
+        if (loginData.success) {
+          window.location.href = "http://localhost:3000/image-editor";
+        } else {
+          alert("Giriş başarısız: " + (loginData.error || "Bilinmeyen hata"));
+        }
+
+      } catch (err) {
+        console.error("HATA:", err);
+        resultArea.textContent += "\n\nCatch Hata:\n" + err.message;
+        alert("Bir hata oluştu: " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>

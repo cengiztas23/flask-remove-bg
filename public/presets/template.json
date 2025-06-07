@@ -1,0 +1,94 @@
+{
+  "version": "0.4",
+  "last_node_id": 7,
+  "last_link_id": 9,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [0, 0],
+      "size": [315, 98],
+      "mode": 0,
+      "class_type": "CheckpointLoaderSimple",
+      "widgets_values": ["v1-5-pruned-emaonly.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "CLIPTextEncode",
+      "pos": [350, -100],
+      "size": [400, 150],
+      "mode": 0,
+      "class_type": "CLIPTextEncode",
+      "inputs": { "clip": [1, 1] },
+      "widgets_values": ["{PROMPT}"]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [350, 100],
+      "size": [400, 150],
+      "mode": 0,
+      "class_type": "CLIPTextEncode",
+      "inputs": { "clip": [1, 1] },
+      "widgets_values": ["{NEGATIVE_PROMPT}"]
+    },
+    {
+      "id": 4,
+      "type": "EmptyLatentImage",
+      "pos": [350, 300],
+      "size": [315, 106],
+      "mode": 0,
+      "class_type": "EmptyLatentImage",
+      "widgets_values": [1024, 1024, 1]
+    },
+    {
+      "id": 5,
+      "type": "KSampler",
+      "pos": [750, 100],
+      "size": [315, 262],
+      "mode": 0,
+      "class_type": "KSampler",
+      "inputs": {
+        "model": [1, 0],
+        "positive": [2, 0],
+        "negative": [3, 0],
+        "latent_image": [4, 0]
+      },
+      "widgets_values": [0, 0, 30, 8, "euler", "normal", 1]
+    },
+    {
+      "id": 6,
+      "type": "VAEDecode",
+      "pos": [1100, 100],
+      "size": [210, 46],
+      "mode": 0,
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": [5, 0],
+        "vae": [1, 2]
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 7,
+      "type": "SaveImage",
+      "pos": [1350, 100],
+      "size": [248, 270],
+      "mode": 0,
+      "class_type": "SaveImage",
+      "inputs": { "images": [6, 0] },
+      "widgets_values": ["ComfyUI"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 5, 0, "MODEL"],
+    [2, 1, 1, 2, 0, "CLIP"],
+    [3, 2, 0, 5, 1, "CONDITIONING"],
+    [4, 3, 0, 5, 2, "CONDITIONING"],
+    [5, 1, 1, 3, 0, "CLIP"],
+    [6, 4, 0, 5, 3, "LATENT"],
+    [7, 5, 0, 6, 0, "LATENT"],
+    [8, 1, 0, 6, 1, "VAE"],
+    [9, 6, 0, 7, 0, "IMAGE"]
+  ]
+}

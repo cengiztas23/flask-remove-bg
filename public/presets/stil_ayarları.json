@@ -1,0 +1,13 @@
+{
+  "id": "samurai_test",
+  "prompt": "A stoic philosopher standing alone on a mountain cliff at sunrise, wearing a simple robe, gazing over a vast landscape, marble statues behind him, ancient scroll in hand, with calm expression and golden light illuminating the scene — in epic, cinematic style.",
+  "negative_prompt": "lowres, blurry, watermark, jpeg artifacts, bad anatomy",
+  "model": "v1-5-pruned-emaonly.safetensors",
+  "width": 1920,
+  "height": 1080,
+  "steps": 40,
+  "cfg": 9.0,
+  "sampler": "dpmpp_2m_sde",
+  "scheduler": "karras",
+  "denoise": 1
+}
