@@ -3,6 +3,7 @@ from flask_cors import CORS
 from rembg import remove
 from PIL import Image
 import io
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -23,4 +24,5 @@ def remove_bg():
     return send_file(img_io, mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))  # Render portunu kullan
+    app.run(host="0.0.0.0", port=port)         # Her yerden erişilebilir olsun
