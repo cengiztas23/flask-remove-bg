@@ -7,26 +7,22 @@ type SideNavProps = {
   setSelectedStyle?: Dispatch<SetStateAction<string | null>>;
 };
 
-// ✅ Mevcut + Yeni Sayfa Linkleri
 const navItems = [
   { name: '🎁 Free Gallery', href: '/free-gallery' },
   { name: 'Generate', href: '/generate' },
-   { name: 'Artist Portraits', href: '/artist-portraits' },
   
   { name: 'Visions & Verses', href: '/vision' },
- 
   { name: 'Edit Your Image', href: '/image-editor' },
   { name: 'Image to Video', href: '/image-to-video' },
   { name: 'Comic Effect', href: '/comic' },
   { name: 'Prompt ChatGPT', href: '/chat' },
 ];
 
-
 export default function SideNav({ selectedStyle, setSelectedStyle }: SideNavProps) {
   return (
-    <div className="w-[240px] flex flex-col items-center justify-center gap-6 bg-black/50 py-8 px-2">
+    <div className="w-[240px] h-screen flex flex-col items-center justify-center gap-6 bg-black/50 py-8 px-2">
 
-      {/* LOGO - home page'e gider */}
+      {/* LOGO */}
       <Link href="/home" className="block mb-6">
         <img
           src="/logo.png"
@@ -35,7 +31,7 @@ export default function SideNav({ selectedStyle, setSelectedStyle }: SideNavProp
         />
       </Link>
 
-      {/* GEÇİŞ BUTONLARI */}
+      {/* MENÜ BUTONLARI */}
       {navItems.map((item) => (
         <Link
           key={item.name}
@@ -46,7 +42,7 @@ export default function SideNav({ selectedStyle, setSelectedStyle }: SideNavProp
         </Link>
       ))}
 
-      {/* SEÇİLEN STİL GÖSTERİMİ */}
+      {/* SEÇİLİ STİL */}
       {selectedStyle && (
         <div className="mt-8 text-center text-sm text-gray-300 px-3">
           <p className="text-cyan-200 font-semibold">Selected Style</p>
