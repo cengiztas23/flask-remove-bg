@@ -28,3 +28,6 @@ coverage/
 
 # Diğer klasörleri dışla
 flask-backend/
+# Temp ve uploads klasörünü ignore et ama içeriği diskte kalsın
+flask-backend/temp/
+flask-backend/uploads/
